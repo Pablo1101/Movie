@@ -217,7 +217,7 @@ namespace MoviesAssesmet
                         break;
                 }
 
-                //delete the customer and return back succes or failiure
+                //delete the customer and return back success or failiure
                 Result = mydatabase.DeleteCustomer(InputID, TableName);
                 MessageBox.Show(fakebutton.Tag + "delete" + Result);
 
