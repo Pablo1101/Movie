@@ -173,20 +173,20 @@ namespace MoviesAssesmet
             string Firstname, Lastname, Phonenumber, Address, ID = null;
             try
             {
-                ID = DGVCustomer.Rows[e.RowIndex].Cells[0].Value.ToString();
-                 Firstname = DGVCustomer.Rows[e.RowIndex].Cells[1].Value.ToString();
-                 Lastname = DGVCustomer.Rows[e.RowIndex].Cells[2].Value.ToString();
+                 ID          = DGVCustomer.Rows[e.RowIndex].Cells[0].Value.ToString();
+                 Firstname   = DGVCustomer.Rows[e.RowIndex].Cells[1].Value.ToString();
+                 Lastname    = DGVCustomer.Rows[e.RowIndex].Cells[2].Value.ToString();
                  Phonenumber = DGVCustomer.Rows[e.RowIndex].Cells[4].Value.ToString();
-                 Address = DGVCustomer.Rows[e.RowIndex].Cells[3].Value.ToString();
+                 Address     = DGVCustomer.Rows[e.RowIndex].Cells[3].Value.ToString();
                 if (e.RowIndex >0)
                 {
 
                     //DGVCustomer.DataSource = mydatabase.FillDGVCustomerWithOwnerClick();
-                    txtCustomerID.Text = ID;
-                    txtFirstName.Text = Firstname;
-                    txtLastname.Text = Lastname;
+                    txtCustomerID.Text  = ID;
+                    txtFirstName.Text   = Firstname;
+                    txtLastname.Text    = Lastname;
                     txtPhoneNumber.Text = Phonenumber;
-                    txtAddress.Text = Address;
+                    txtAddress.Text     = Address;
                 }
 
             }
@@ -342,23 +342,27 @@ namespace MoviesAssesmet
             try
             {
                 MovieID = DGVMovies.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Rating = DGVMovies.Rows[e.RowIndex].Cells[1].Value.ToString();
-                Title = DGVMovies.Rows[e.RowIndex].Cells[2].Value.ToString();
-                Year = DGVMovies.Rows[e.RowIndex].Cells[3].Value.ToString();
-                Plot = DGVMovies.Rows[e.RowIndex].Cells[4].Value.ToString();
-                Genre = DGVMovies.Rows[e.RowIndex].Cells[5].Value.ToString();
+                 Rating = DGVMovies.Rows[e.RowIndex].Cells[1].Value.ToString();
+                  Title = DGVMovies.Rows[e.RowIndex].Cells[2].Value.ToString();
+                   Year = DGVMovies.Rows[e.RowIndex].Cells[3].Value.ToString();
+                   Plot = DGVMovies.Rows[e.RowIndex].Cells[4].Value.ToString();
+                  Genre = DGVMovies.Rows[e.RowIndex].Cells[5].Value.ToString();
 
 
                 if (e.RowIndex > 0)
                 {
 
+                    lblMovCost.Text = myClass.Cost(Year);
+
                     //DGVCustomer.DataSource = mydatabase.FillDGVCustomerWithOwnerClick();
-                    txtMovieID.Text = MovieID;
-                    txtRating.Text = Rating;
+                    txtMovieID.Text   = MovieID;
+                    txtRating.Text    = Rating;
                     txtMovieName.Text = Title;
-                    txtYear.Text = Year;
-                    txtPlot.Text = Plot;
-                    txtGenre.Text = Genre;
+                    txtYear.Text      = Year;
+                    txtPlot.Text      = Plot;
+                    txtGenre.Text     = Genre;
+
+
                 }
 
             }
@@ -368,7 +372,14 @@ namespace MoviesAssesmet
                 MessageBox.Show(ex.Message);
             }
 
+      
+
+
         }
+
+
+
+
 
         private void btnIssueMovie_Click(object sender, EventArgs e)
         {
@@ -401,9 +412,75 @@ namespace MoviesAssesmet
 
         }
 
+
+        private void DGVRentedMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string RentedMovID, CustID, MovID, FN, LN, MovName, Address;
+            try
+            {
+                RentedMovID = DGVRentedMovies.Rows[e.RowIndex].Cells[5].Value.ToString();
+                     CustID = DGVRentedMovies.Rows[e.RowIndex].Cells[9].Value.ToString();
+                      MovID = DGVRentedMovies.Rows[e.RowIndex].Cells[0].Value.ToString();
+                         FN = DGVRentedMovies.Rows[e.RowIndex].Cells[1].Value.ToString();
+                         LN = DGVRentedMovies.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    MovName = DGVRentedMovies.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    Address = DGVRentedMovies.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    // = DGVRentedMovies.Rows[e.RowIndex].Cells[3].Value.ToString();
+
+
+
+                if (e.RowIndex > 0)
+                {
+                    txtCustomerID.Text = CustID;
+                    txtMovieID.Text    = MovID;
+                    txtFirstName.Text  = FN;
+                    txtLastname.Text   = LN;
+                    txtMovieName.Text  = MovName;
+                    txtAddress.Text    = Address;
+
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnReturnMovie_Click(object sender, EventArgs e)
         {
+            string result = null;
+            if ((txtCustomerID.Text != string.Empty)  && (txtMovieID.Text != string.Empty))
+            {
+                try
+                {
+                 result = mydatabase.ReturnMovie(txtMovieID.Text, txtCustomerID.Text, txtRentedMovieID.Text);
+                  MessageBox.Show("Movie Returned.");
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+
+                DisplayDataGridViewRentedMovies();
+                txtCustomerID.Text = "";
+                txtMovieID.Text = "";
+
+            }
+            else
+            {
+                MessageBox.Show("enter data");
+            }
 
         }
+        }
+
+
     }
-}
+
+

@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGVRentedMovies = new System.Windows.Forms.DataGridView();
             this.TabContol = new System.Windows.Forms.TabControl();
             this.tabRented = new System.Windows.Forms.TabPage();
@@ -65,6 +68,10 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnIssueMovie = new System.Windows.Forms.Button();
             this.btnReturnMovie = new System.Windows.Forms.Button();
+            this.lblMovCost = new System.Windows.Forms.Label();
+            this.txt5 = new System.Windows.Forms.TextBox();
+            this.txtcurrentyear = new System.Windows.Forms.TextBox();
+            this.txtRentedMovieID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGVRentedMovies)).BeginInit();
             this.TabContol.SuspendLayout();
             this.tabRented.SuspendLayout();
@@ -78,10 +85,20 @@
             // 
             this.DGVRentedMovies.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.DGVRentedMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DGVRentedMovies.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DGVRentedMovies.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.DGVRentedMovies.Location = new System.Drawing.Point(0, 0);
             this.DGVRentedMovies.Name = "DGVRentedMovies";
             this.DGVRentedMovies.Size = new System.Drawing.Size(364, 206);
             this.DGVRentedMovies.TabIndex = 0;
+            this.DGVRentedMovies.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVRentedMovies_CellContentClick);
             // 
             // TabContol
             // 
@@ -120,6 +137,14 @@
             // 
             // DGVMovies
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVMovies.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DGVMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVMovies.Location = new System.Drawing.Point(1, 0);
             this.DGVMovies.Name = "DGVMovies";
@@ -141,6 +166,14 @@
             // 
             // DGVCustomer
             // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVCustomer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DGVCustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVCustomer.Location = new System.Drawing.Point(1, 0);
             this.DGVCustomer.Name = "DGVCustomer";
@@ -151,6 +184,7 @@
             // btnAddMovie
             // 
             this.btnAddMovie.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddMovie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnAddMovie.Location = new System.Drawing.Point(12, 373);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(103, 23);
@@ -219,6 +253,7 @@
             // btnDeleteMovie
             // 
             this.btnDeleteMovie.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnDeleteMovie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnDeleteMovie.Location = new System.Drawing.Point(12, 431);
             this.btnDeleteMovie.Name = "btnDeleteMovie";
             this.btnDeleteMovie.Size = new System.Drawing.Size(103, 23);
@@ -230,6 +265,7 @@
             // btnUpdateMovie
             // 
             this.btnUpdateMovie.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnUpdateMovie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnUpdateMovie.Location = new System.Drawing.Point(12, 402);
             this.btnUpdateMovie.Name = "btnUpdateMovie";
             this.btnUpdateMovie.Size = new System.Drawing.Size(103, 23);
@@ -294,6 +330,7 @@
             // btnAddCustomer
             // 
             this.btnAddCustomer.BackColor = System.Drawing.Color.Lavender;
+            this.btnAddCustomer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnAddCustomer.Location = new System.Drawing.Point(12, 269);
             this.btnAddCustomer.Name = "btnAddCustomer";
             this.btnAddCustomer.Size = new System.Drawing.Size(103, 23);
@@ -382,6 +419,7 @@
             // btnUpdate
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.Lavender;
+            this.btnUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnUpdate.Location = new System.Drawing.Point(12, 298);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(104, 23);
@@ -393,6 +431,7 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.Lavender;
+            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btnDelete.Location = new System.Drawing.Point(12, 327);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(103, 23);
@@ -428,12 +467,50 @@
             this.btnReturnMovie.UseVisualStyleBackColor = false;
             this.btnReturnMovie.Click += new System.EventHandler(this.btnReturnMovie_Click);
             // 
+            // lblMovCost
+            // 
+            this.lblMovCost.AutoSize = true;
+            this.lblMovCost.Location = new System.Drawing.Point(736, 12);
+            this.lblMovCost.Name = "lblMovCost";
+            this.lblMovCost.Size = new System.Drawing.Size(62, 13);
+            this.lblMovCost.TabIndex = 35;
+            this.lblMovCost.Text = "Rental Cost";
+            // 
+            // txt5
+            // 
+            this.txt5.BackColor = System.Drawing.Color.LightCyan;
+            this.txt5.Location = new System.Drawing.Point(710, 622);
+            this.txt5.Name = "txt5";
+            this.txt5.Size = new System.Drawing.Size(61, 20);
+            this.txt5.TabIndex = 36;
+            this.txt5.Text = "5";
+            // 
+            // txtcurrentyear
+            // 
+            this.txtcurrentyear.BackColor = System.Drawing.Color.LightCyan;
+            this.txtcurrentyear.Location = new System.Drawing.Point(576, 620);
+            this.txtcurrentyear.Name = "txtcurrentyear";
+            this.txtcurrentyear.Size = new System.Drawing.Size(61, 20);
+            this.txtcurrentyear.TabIndex = 39;
+            this.txtcurrentyear.Text = "5";
+            // 
+            // txtRentedMovieID
+            // 
+            this.txtRentedMovieID.Location = new System.Drawing.Point(269, 314);
+            this.txtRentedMovieID.Name = "txtRentedMovieID";
+            this.txtRentedMovieID.Size = new System.Drawing.Size(100, 20);
+            this.txtRentedMovieID.TabIndex = 40;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(861, 654);
+            this.ClientSize = new System.Drawing.Size(861, 617);
+            this.Controls.Add(this.txtRentedMovieID);
+            this.Controls.Add(this.txtcurrentyear);
+            this.Controls.Add(this.txt5);
+            this.Controls.Add(this.lblMovCost);
             this.Controls.Add(this.btnReturnMovie);
             this.Controls.Add(this.btnIssueMovie);
             this.Controls.Add(this.btnDeleteMovie);
@@ -519,6 +596,10 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnIssueMovie;
         private System.Windows.Forms.Button btnReturnMovie;
+        private System.Windows.Forms.Label lblMovCost;
+        private System.Windows.Forms.TextBox txt5;
+        private System.Windows.Forms.TextBox txtcurrentyear;
+        private System.Windows.Forms.TextBox txtRentedMovieID;
     }
 }
 

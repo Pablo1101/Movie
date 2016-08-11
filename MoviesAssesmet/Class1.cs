@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace MoviesAssesmet
 {
-    class Class1
+    public class Class1
     {
-        //Sreate a Data Adapter, Connection & SQL command.
+        //Create a Data Adapter, Connection & SQL command.
         private SqlDataAdapter DA = new SqlDataAdapter();
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand(); 
@@ -67,7 +67,7 @@ namespace MoviesAssesmet
 
             //pass the datatable to the DGV
           
-return dt;
+            return dt;
 
           }
             
@@ -280,13 +280,13 @@ return dt;
             //only run if textbox is used
             if (!object.ReferenceEquals(CustID, string.Empty) && (!object.ReferenceEquals(MovID, string.Empty)))
             {
-                var myCommand = new SqlCommand("INSERT into RentedMovies (MovieIDFK, CustIDFK, DateRented)" + "Values(@MovieID, @CustID, @Today)", Connection);
+                var myCommand = new SqlCommand("INSERT into RentedMovies (CustIDFK, MovieIDFK, DateRented)" + "Values( @CustID, @MovieID, @Today)", Connection);
 
             DateTime today = DateTime.Now;
 
                 //prevent SQL Injections
-                myCommand.Parameters.AddWithValue("MovieID", MovID);
                 myCommand.Parameters.AddWithValue("CustID", CustID);
+                myCommand.Parameters.AddWithValue("MovieID", MovID);
                 myCommand.Parameters.AddWithValue("Today", today);
 
 
@@ -305,6 +305,62 @@ return dt;
             
 
         }
-    }
 
+
+        public string ReturnMovie(string CustID, string MovID, string ID)
+        {
+                DateTime today = DateTime.Now;
+
+            if (!object.ReferenceEquals(CustID, string.Empty) && (!object.ReferenceEquals(MovID, string.Empty)))
+            {
+                var myCommand = new SqlCommand("Update RentedMovies set MovieIDFK = @MovID, CustIDFK = @CustID, DateReturned = @today Where RMID = @ID ",Connection );
+                //var myCommand = new SqlCommand("UPDATE Movies set Rating = @Rating, Title = @Title, Year = @year, plot = @plot, genre = @Genre where MovieID = @ID ", Connection);
+
+
+                //prevent SQL Injections
+                myCommand.Parameters.AddWithValue("today", today);
+                myCommand.Parameters.AddWithValue("MovID", MovID);
+                myCommand.Parameters.AddWithValue("CustID", CustID);
+                myCommand.Parameters.AddWithValue("ID", ID);
+
+
+
+
+
+
+                //open connection to add SQL
+                Connection.Open();
+                myCommand.ExecuteNonQuery();
+                Connection.Close();
+                return " is Successful";
+
+            } 
+            else
+            {
+                Connection.Close();
+                return " Failed";
+            }
+
+        }
+
+        public string Cost(String movieYear)
+        {
+
+            int yearNow = (Convert.ToInt32(DateTime.Now.Year));
+            int yearsOld = (yearNow - (Convert.ToInt32(movieYear)));
+
+            if (yearsOld <= 5)
+            {
+                return "$5";
+
+            }
+            else
+            {
+                return "$2";
+
+            }
+        }
+    }
 }
+
+
