@@ -16,7 +16,7 @@ namespace MoviesAssesmet
     {
 
         Class1 myClass = new Class1();
-        //create an instance of the database class
+        //create an instance of the database classsadfasds
         Class1 mydatabase = new Class1();
 
         public Form1()
